@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-500 text-white p-4 text-center">Seu anúncio aqui</header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <h1 class="text-2xl font-bold mb-4">Jogo da Memória</h1>
+        <div id="game" class="grid grid-cols-4 gap-4"></div>
+        <button id="restart" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Reiniciar Jogo</button>
+    </main>
+
+    <footer class="bg-blue-500 text-white p-4 text-center">Seu anúncio aqui</footer>
+
+<script>
+const icons = ['\u{1F379}','\u{1F354}','\u{1F355}','\u{1F372}','\u{1F370}','\u{1F37A}'];
+let cards = [];
+let firstCard = null;
+let lockBoard = false;
+const game = document.getElementById('game');
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function createBoard() {
+    const doubled = icons.concat(icons);
+    shuffle(doubled);
+    game.innerHTML = '';
+    cards = doubled.map(icon => {
+        const card = document.createElement('button');
+        card.className = 'h-24 w-24 bg-white text-4xl flex items-center justify-center rounded shadow';
+        card.dataset.icon = icon;
+        card.innerText = '';
+        card.addEventListener('click', handleCardClick);
+        game.appendChild(card);
+        return card;
+    });
+}
+
+function handleCardClick(e) {
+    const card = e.currentTarget;
+    if (lockBoard || card.innerText) return;
+    revealCard(card);
+    if (!firstCard) {
+        firstCard = card;
+    } else {
+        checkForMatch(card);
+    }
+}
+
+function revealCard(card) {
+    card.innerText = card.dataset.icon;
+    card.classList.add('bg-yellow-200');
+}
+
+function hideCard(card) {
+    card.innerText = '';
+    card.classList.remove('bg-yellow-200');
+}
+
+function checkForMatch(secondCard) {
+    if (firstCard.dataset.icon === secondCard.dataset.icon) {
+        firstCard.classList.add('bg-green-200');
+        secondCard.classList.add('bg-green-200');
+        firstCard = null;
+        if (cards.every(c => c.innerText)) {
+            setTimeout(() => alert('Parabéns! Você encontrou todos os pares.'), 300);
+        }
+    } else {
+        lockBoard = true;
+        setTimeout(() => {
+            hideCard(firstCard);
+            hideCard(secondCard);
+            firstCard = null;
+            lockBoard = false;
+        }, 800);
+    }
+}
+
+document.getElementById('restart').addEventListener('click', createBoard);
+
+createBoard();
+</script>
+</body>
+</html>
