@@ -1,4 +1,4 @@
-# Projetos
+# Follow
 
 Aplicativo web de Kanban para uma pessoa organizar vários projetos e tarefas, com prioridades, prazos e
 checklists. Interface em português do Brasil, pensada para computador e celular.
@@ -40,9 +40,9 @@ Tudo por variáveis de ambiente (arquivo `.env` ou painel da hospedagem). Nada d
 | `PORT` | `3000` | Porta do servidor. |
 | `NODE_ENV` | — | Use `production` em produção (cookie `Secure` e HSTS). |
 | `BASE_URL` | `http://localhost:PORT` | Endereço público do app. Entra nos links de recuperação de senha. **Obrigatório em produção** (use `https://`). |
-| `DATABASE_PATH` | `./data/projetos.db` | Arquivo SQLite. Em produção, aponte para um disco persistente. |
+| `DATABASE_PATH` | `./data/follow.db` | Arquivo SQLite. Em produção, aponte para um disco persistente. |
 | `SMTP_URL` | vazio | Ex.: `smtp://usuario:senha@smtp.seuservico.com:587`. Sem isso o link só vai para o log. |
-| `MAIL_FROM` | `Projetos <nao-responder@localhost>` | Remetente dos e-mails. |
+| `MAIL_FROM` | `Follow <nao-responder@localhost>` | Remetente dos e-mails. |
 | `TRUST_PROXY` | `0` | Defina `1` atrás de proxy reverso (Render, Fly, Railway, Nginx…) para o limite de tentativas de login enxergar o IP real. |
 
 ## Publicar
@@ -52,21 +52,21 @@ Fly.io, Railway ou Render (plano com disco), ou uma VPS, servem. Serviços "serv
 (Vercel, Netlify) **não** servem para esta versão.
 
 1. Defina `NODE_ENV=production`, `BASE_URL=https://seu-dominio`, `TRUST_PROXY=1`, `SMTP_URL` e `MAIL_FROM`.
-2. Monte um volume e aponte `DATABASE_PATH` para ele (ex.: `/data/projetos.db`).
+2. Monte um volume e aponte `DATABASE_PATH` para ele (ex.: `/data/follow.db`).
 3. Comando de build: `npm ci --omit=dev`. Comando de início: `npm start`.
 4. Sirva por HTTPS (as plataformas acima já fazem isso).
 
 Com Docker, há um `Dockerfile` pronto (o banco fica em `/data`):
 
 ```bash
-docker build -t projetos .
-docker run -d -p 3000:3000 -v projetos-dados:/data \
-  -e BASE_URL=https://seu-dominio -e TRUST_PROXY=1 -e SMTP_URL=... projetos
+docker build -t follow .
+docker run -d -p 3000:3000 -v follow-dados:/data \
+  -e BASE_URL=https://seu-dominio -e TRUST_PROXY=1 -e SMTP_URL=... follow
 ```
 
 > O `Dockerfile` não foi construído durante o desenvolvimento (o ambiente tinha só o cliente Docker, sem o serviço). Os mesmos passos (`npm ci --omit=dev` + `node server/index.js`) foram executados diretamente e funcionam.
 
-**Backup:** copie o arquivo definido em `DATABASE_PATH` (com o app parado, ou use `sqlite3 projetos.db ".backup copia.db"`).
+**Backup:** copie o arquivo definido em `DATABASE_PATH` (com o app parado, ou use `sqlite3 follow.db ".backup copia.db"`).
 
 ## Testes
 

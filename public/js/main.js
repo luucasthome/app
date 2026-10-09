@@ -31,7 +31,7 @@ async function logout() {
 function shell() {
   const main = h('main', { id: 'main', class: 'main', tabindex: '-1' });
   const header = h('header', { class: 'topbar' },
-    h('a', { class: 'brand', href: '#/projetos', 'aria-label': 'Projetos — página inicial' }, h('span', { class: 'brand-mark', 'aria-hidden': 'true' }), h('span', { class: 'brand-name' }, 'Projetos')),
+    h('a', { class: 'brand', href: '#/projetos', 'aria-label': 'Follow — página inicial' }, h('span', { class: 'brand-mark', 'aria-hidden': 'true' }), h('span', { class: 'brand-name' }, 'Follow')),
     h('div', { class: 'topbar-user' },
       h('span', { class: 'avatar', 'aria-hidden': 'true' }, (user.name.trim()[0] ?? '?').toUpperCase()),
       h('span', { class: 'user-name', title: user.email }, user.name),

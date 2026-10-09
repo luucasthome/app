@@ -9,7 +9,7 @@ const db = openDb(config.dbPath);
 const app = createApp({ db, config });
 
 const server = app.listen(config.port, () => {
-  console.log(`Projetos rodando em ${config.baseUrl} (porta ${config.port})`);
+  console.log(`Follow rodando em ${config.baseUrl} (porta ${config.port})`);
 });
 
 for (const signal of ['SIGINT', 'SIGTERM']) {

@@ -5,7 +5,7 @@ function authShell(container, title, subtitle, ...content) {
   clear(container).append(
     h('main', { class: 'auth-page' },
       h('div', { class: 'auth-card' },
-        h('div', { class: 'brand brand-lg' }, h('span', { class: 'brand-mark', 'aria-hidden': 'true' }), 'Projetos'),
+        h('div', { class: 'brand brand-lg' }, h('span', { class: 'brand-mark', 'aria-hidden': 'true' }), 'Follow'),
         h('h1', null, title),
         subtitle ? h('p', { class: 'muted auth-sub' }, subtitle) : null,
         ...content)));

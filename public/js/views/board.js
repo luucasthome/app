@@ -49,7 +49,7 @@ export async function boardView(main, { projectId, go }) {
         : h('button', { class: 'btn btn-primary', onclick: () => location.reload() }, 'Tentar novamente')));
     return () => {};
   }
-  document.title = `${project.name} — Projetos`;
+  document.title = `${project.name} — Follow`;
 
   const isArchived = () => project.status === 'archived';
 
@@ -276,7 +276,7 @@ export async function boardView(main, { projectId, go }) {
   function openSettings() {
     openProjectForm({
       project,
-      onSaved: (p) => { project = p; document.title = `${p.name} — Projetos`; renderBoard(); },
+      onSaved: (p) => { project = p; document.title = `${p.name} — Follow`; renderBoard(); },
       onArchiveChange: (p) => { if (p.status === 'archived') go('#/arquivados'); else { project = p; renderBoard(); } },
       onDeleted: () => go('#/projetos'),
     });
@@ -292,7 +292,7 @@ export async function boardView(main, { projectId, go }) {
   return () => {
     alive = false;
     sortables.forEach((s) => s.destroy());
-    document.title = 'Projetos';
+    document.title = 'Follow';
     document.querySelectorAll('dialog').forEach((d) => d.remove());
   };
 }

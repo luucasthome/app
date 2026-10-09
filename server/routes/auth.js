@@ -116,9 +116,9 @@ export function authRouter({ db, config, mailer }) {
       mailer
         .send({
           to: user.email,
-          subject: 'Redefinir sua senha — Projetos',
+          subject: 'Redefinir sua senha — Follow',
           text:
-            `Olá, ${user.name}!\n\nRecebemos um pedido para redefinir a senha da sua conta no Projetos.\n` +
+            `Olá, ${user.name}!\n\nRecebemos um pedido para redefinir a senha da sua conta no Follow.\n` +
             `Para escolher uma nova senha, acesse o link abaixo (válido por ${config.resetMinutes} minutos):\n\n${link}\n\n` +
             'Se você não fez esse pedido, ignore esta mensagem: sua senha continua a mesma.',
         })

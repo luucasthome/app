@@ -1,7 +1,7 @@
 {
-  "name": "projetos",
+  "name": "follow",
   "version": "1.0.0",
-  "description": "Projetos — Kanban simples para organizar projetos e tarefas",
+  "description": "Follow — Kanban simples para organizar projetos e tarefas",
   "private": true,
   "license": "MIT",
   "type": "module",

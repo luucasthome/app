@@ -6,10 +6,10 @@ export function loadConfig(overrides = {}) {
   return {
     port,
     production: process.env.NODE_ENV === 'production',
-    dbPath: process.env.DATABASE_PATH || path.resolve('data/projetos.db'),
+    dbPath: process.env.DATABASE_PATH || path.resolve('data/follow.db'),
     baseUrl,
     smtpUrl: process.env.SMTP_URL || '',
-    mailFrom: process.env.MAIL_FROM || 'Projetos <nao-responder@localhost>',
+    mailFrom: process.env.MAIL_FROM || 'Follow <nao-responder@localhost>',
     trustProxy: process.env.TRUST_PROXY === '1' || process.env.TRUST_PROXY === 'true',
     sessionDays: 30,
     resetMinutes: 60,
