@@ -1,5 +1,8 @@
 // Cliente da API. Erros chegam como ApiError, já com mensagem em português.
 
+// Na versão HTML única (standalone), este arquivo é substituído por local-api.js, onde LOCAL = true.
+export const LOCAL = false;
+
 export class ApiError extends Error {
   constructor(status, code, message, fields = {}) {
     super(message);

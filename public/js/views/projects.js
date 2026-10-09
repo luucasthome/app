@@ -1,4 +1,4 @@
-import { ApiError, get, patch, post } from '../api.js';
+import { ApiError, LOCAL, get, patch, post } from '../api.js';
 import { banner, clear, debounce, fmtDate, h, icon, newId, norm, toast, todayStr, withBusy } from '../ui.js';
 import { openProjectForm } from './projectForm.js';
 
@@ -96,6 +96,7 @@ export async function projectsView(main, { archived }) {
         h('button', { type: 'button', class: 'btn btn-secondary', onclick: () => { searchInput.value = ''; query = ''; renderList(); searchInput.focus(); } }, 'Limpar busca')));
     }
     content.append(h('div', { class: 'project-grid' }, shown.map(card)));
+    if (LOCAL) content.append(h('p', { class: 'local-note' }, icon('info', 16), 'Seus dados ficam apenas neste navegador. Use “Exportar” de vez em quando para guardar um backup.'));
     if (!archived && !projects.some((p) => p.is_demo)) {
       content.append(h('p', { class: 'demo-hint muted' }, 'Quer ver o app com dados de exemplo? ', demoButton('link-btn', 'Criar projeto demonstrativo'), '.'));
     }

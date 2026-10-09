@@ -12,7 +12,9 @@
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
     "test": "node --test \"test/*.test.js\"",
-    "test:e2e": "node test/e2e/run.mjs"
+    "test:e2e": "node test/e2e/run.mjs",
+    "build:standalone": "node scripts/build-standalone.mjs",
+    "test:e2e:standalone": "node test/e2e/standalone.mjs"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",
@@ -21,6 +23,7 @@
     "sortablejs": "^1.15.7"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "playwright": "^1.56.1"
   }
 }

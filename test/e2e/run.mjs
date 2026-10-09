@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import { createApp } from '../../server/app.js';
 import { loadConfig } from '../../server/config.js';
 import { openDb } from '../../server/db.js';
+import { cardTitles, dragCard } from './helpers.mjs';
 
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const shots = process.argv[2] || 'test-results';
@@ -34,28 +35,6 @@ let step = 0;
 const ok = (msg) => console.log(`  ✓ ${msg}`);
 // espera as animações dos diálogos terminarem antes de capturar
 const shot = async (page, name) => { await page.waitForTimeout(350); await page.screenshot({ path: `${shots}/${String(++step).padStart(2, '0')}-${name}.png` }); };
-
-const cardTitles = (page, col) => page.locator(`.card-list[data-column="${col}"] .card-title`).allTextContents();
-
-async function dragCard(page, fromTitle, toColumn, beforeTitle) {
-  const card = page.locator('.card', { hasText: fromTitle }).first();
-  const cb = await card.boundingBox();
-  let tx; let ty;
-  if (beforeTitle) {
-    const t = await page.locator('.card', { hasText: beforeTitle }).first().boundingBox();
-    tx = t.x + t.width / 2; ty = t.y + 4;
-  } else {
-    const list = await page.locator(`.card-list[data-column="${toColumn}"]`).boundingBox();
-    tx = list.x + list.width / 2; ty = list.y + list.height - 6;
-  }
-  await page.mouse.move(cb.x + cb.width / 2, cb.y + cb.height / 2);
-  await page.mouse.down();
-  await page.mouse.move(cb.x + cb.width / 2 + 10, cb.y + cb.height / 2 + 10, { steps: 4 });
-  await page.mouse.move(tx, ty, { steps: 12 });
-  await page.waitForTimeout(200);
-  await page.mouse.up();
-  await page.waitForTimeout(500);
-}
 
 async function signUp(page, name, email, password) {
   await page.goto(`${base}/`);

@@ -166,6 +166,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--p
 .progress-fill { height: 100%; background: var(--primary); border-radius: 999px; transition: width .25s; }
 .progress-block { display: grid; gap: 6px; }
 .progress-text { font-size: .86rem; color: var(--muted); }
+.local-note { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; font-size: .88rem; color: var(--muted); text-align: center; }
 .demo-hint { margin-top: 20px; font-size: .92rem; text-align: center; }
 .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .74rem; font-weight: 700; letter-spacing: .02em; }
 .badge-demo { background: var(--warn-soft); color: var(--warn); }

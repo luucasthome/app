@@ -68,11 +68,43 @@ docker run -d -p 3000:3000 -v follow-dados:/data \
 
 **Backup:** copie o arquivo definido em `DATABASE_PATH` (com o app parado, ou use `sqlite3 follow.db ".backup copia.db"`).
 
+## Versão HTML única (sem servidor)
+
+Além da versão com servidor, o Follow também pode ser gerado como **um único arquivo**, `standalone/follow.html`,
+que não precisa de Node, banco nem internet. Ele usa exatamente a mesma interface, mas **guarda os dados no
+próprio navegador** (`localStorage`).
+
+```bash
+npm run build:standalone   # gera standalone/follow.html (o arquivo gerado também está versionado)
+```
+
+Como usar: dê duplo clique no arquivo, ou publique-o como página estática (GitHub Pages, Netlify, Cloudflare Pages…
+basta enviar o arquivo). Funciona offline, sem custo.
+
+O que muda em relação à versão com servidor:
+
+| | Com servidor | HTML único |
+|---|---|---|
+| Conta, login e recuperação de senha | sim | **não** (não há conta; é um espaço pessoal) |
+| Dados | no servidor, acessíveis de qualquer aparelho | **só neste navegador, neste aparelho** |
+| Isolamento entre contas | validado no servidor | não se aplica (um único espaço por navegador) |
+| Backup | cópia do arquivo do banco | botões **Exportar** / **Importar** (arquivo `.json`) |
+
+Cuidados importantes:
+
+- **Faça backup com frequência** (Exportar). Limpar os dados do navegador apaga tudo, e alguns navegadores
+  (como o Safari no iPhone) podem descartar dados de sites que ficam muito tempo sem uso.
+- Abrir o arquivo do disco e abrir o mesmo arquivo hospedado em um endereço web são **espaços separados**
+  (cada endereço tem seu armazenamento). Para levar os dados de um para o outro, use Exportar e Importar.
+- Celular e computador **não sincronizam**; para isso, use a versão com servidor.
+- Importar um backup substitui tudo, mas o arquivo é validado antes (e a confirmação só aparece se for válido).
+
 ## Testes
 
 ```bash
-npm test          # API: autenticação, projetos, tarefas, ordenação, isolamento entre contas (19 testes)
-npm run test:e2e  # navegador real (Chromium via Playwright): computador e celular
+npm test                    # 29 testes: API (login, projetos, tarefas, ordenação, isolamento entre contas) e camada local
+npm run test:e2e            # navegador real (Chromium via Playwright): versão com servidor, computador e celular
+npm run build:standalone && npm run test:e2e:standalone   # idem para o HTML único, aberto por file://
 ```
 
 O teste de navegador precisa do Chromium do Playwright (`npx playwright install chromium`). Ele sobe um
@@ -92,7 +124,10 @@ server/
 public/
   index.html, css/app.css
   js/main.js        # roteador e estrutura da página
+  js/api.js         # cliente da API do servidor (no HTML único é trocado por js/local-api.js)
   js/views/         # telas: acesso, projetos, quadro, painel da tarefa
+scripts/            # build do HTML único
+standalone/         # follow.html gerado
 test/               # testes de API e de navegador
 ```
 
