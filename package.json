@@ -1,0 +1,26 @@
+{
+  "name": "projetos",
+  "version": "1.0.0",
+  "description": "Projetos — Kanban simples para organizar projetos e tarefas",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test \"test/*.test.js\"",
+    "test:e2e": "node test/e2e/run.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.3.0",
+    "nodemailer": "^10.0.16",
+    "sortablejs": "^1.15.7"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}
