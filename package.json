@@ -1,0 +1,17 @@
+{
+  "name": "mural-beco105",
+  "version": "1.0.0",
+  "description": "Mural da Equipe | Beco105 — comunicação interna para a TV e gestão pelo celular",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "test": "node --no-warnings --test test/*.test.js",
+    "demo": "node --no-warnings scripts/demo.js",
+    "demo:limpar": "node --no-warnings scripts/demo.js limpar",
+    "usuario": "node --no-warnings scripts/usuario.js",
+    "e2e": "node --no-warnings test/e2e/run.mjs"
+  },
+  "license": "MIT"
+}
