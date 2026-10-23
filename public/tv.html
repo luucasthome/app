@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR" class="tvpage">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mural da Equipe | Beco105</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/tv.css">
+</head>
+<body>
+<div id="viewport" class="tv">
+  <div id="stage" class="stage">
+    <header class="cab">
+      <div class="cab__marca">
+        <div class="cab__textura" aria-hidden="true"></div>
+        <div><div class="cab__nome">BECO105</div><div class="cab__sub">MURAL DA EQUIPE</div></div>
+      </div>
+      <div class="cab__data"><div class="cab__dia" id="cab-dia"></div><div class="cab__turno" id="cab-turno"></div></div>
+    </header>
+
+    <section class="atencao">
+      <div class="atencao__titulo">
+        <h2>ATENÇÃO HOJE</h2>
+        <div class="faixa-stale" id="faixa-stale" role="status"></div>
+      </div>
+      <div class="avisos" id="avisos"></div>
+    </section>
+
+    <div class="colunas">
+      <section class="col" id="col-reservas">
+        <div class="col__cab"><h2>RESERVAS</h2><span class="col__cnt" id="cnt-reservas"></span></div>
+        <div class="col__corpo"><div class="lista" id="lista-reservas"></div><div id="evento"></div></div>
+      </section>
+      <section class="col" id="col-pendencias">
+        <div class="col__cab"><h2>PENDÊNCIAS</h2><span class="col__cnt" id="cnt-pendencias"></span></div>
+        <div class="col__corpo"><div class="lista" id="lista-pendencias"></div></div>
+      </section>
+      <section class="col" id="col-rotinas">
+        <div class="col__cab"><h2>ROTINAS</h2><span class="col__cnt" id="cnt-rotinas"></span></div>
+        <div class="col__corpo"><div class="lista" id="lista-rotinas"></div></div>
+      </section>
+    </div>
+
+    <footer class="rodape">
+      <div class="rodape__sync" id="rodape-sync"></div>
+      <div id="rodape-demo"></div>
+      <div class="rodape__pag"><span id="rodape-pag"></span><span class="pontos" id="pontos"></span></div>
+    </footer>
+  </div>
+  <div class="tela-cheia" id="tela-erro">
+    <div class="estado estado--erro" style="max-width:1200px">
+      <div><div class="estado__titulo">Não foi possível carregar</div><div class="estado__det">O mural ainda não conseguiu falar com o servidor. Tentando de novo automaticamente.</div></div>
+    </div>
+  </div>
+</div>
+<script type="module" src="/tv.js"></script>
+</body>
+</html>
